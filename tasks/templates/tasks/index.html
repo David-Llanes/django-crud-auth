@@ -1,0 +1,14 @@
+{% extends './layout.html' %}
+
+{% block content %}
+    <main class="container">
+        <section class="card card-body mt-5">
+            <p class="display-2 fw-bold text-center">Pagina de inicio</p>
+            <p>Esta es una pagina web creada con el framework Django. Utiliza Bootstrap para el diseño.</p>
+            <div class="text-center">
+                <a class="btn btn-secondary" href="{% url 'tasks:signup' %}">Regístrate ahora</a>
+                <a class="btn btn-primary" href="{% url 'tasks:login' %}">Inicia sesión</a>
+            </div>
+        </section>
+    </main>
+{% endblock%}

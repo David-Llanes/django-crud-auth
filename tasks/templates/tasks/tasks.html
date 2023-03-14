@@ -1,0 +1,49 @@
+{% extends './layout.html' %}
+
+{% block content %}
+    <main class="container">
+        <div class="row">
+            <section class="col md-6 offset md-3">
+                {% if completed %}
+                    <p class="display-1 fw-bold text-center py-5">Tareas completadas</p>
+                    <ul class="list-group">
+                        {% for task in tasks %}
+                            <li class="list-group-item">
+                                <header class="d-flex justify-content-between">
+                                    <a href="{% url 'tasks:task_detail' task.id %}" class="text-decoration-none">
+                                        <p class="display-5 fw-bold">{{task.title}}</p>
+                                    </a>
+                                    <p>{{task.user.username}}</p>
+                                </header>
+
+                                <p>{{task.description}}</p>
+                            </li>
+                        {% empty %}
+                            <p class="display-3">El usuario {{task.user.username}} no ha acompletado ninguna tarea. </p>
+                        {% endfor %}
+                    </ul>
+                    <a href="{% url 'tasks:tasks' %}">Ver tareas pendientes
+                {% else %}
+                    <p class="display-1 fw-bold text-center py-5">Tareas pendientes</p>
+                    <ul class="list-group">
+                        {% for task in tasks %}
+                            <li class="list-group-item">
+                                <header class="d-flex justify-content-between">
+                                    <a href="{% url 'tasks:task_detail' task.id %}" class="text-decoration-none">
+                                        <p class="display-5 fw-bold">{{task.title}}</p>
+                                    </a>
+                                    <p>{{task.user.username}}</p>
+                                </header>
+
+                                <p>{{task.description}}</p>
+                            </li>
+                        {% empty %}
+                            <p class="display-3">No hay tareas pendientes para el usuario {{task.user.username}}</p>
+                        {% endfor %}
+                    </ul>
+                    <a href="{% url 'tasks:tasks_completed' %}">Consultar las tareas completadas</a>
+                {% endif %}
+            </section>
+        </div>
+    </main>
+{% endblock%}

@@ -1,0 +1,51 @@
+{% extends './layout.html' %}
+
+{% block content %}
+    <main class="container">
+        <div class="row">
+            <section class="col-md-4 offset-md-4 mt-5">
+
+                <form action="{% url 'tasks:login' %}" method="post" class="card card-body" autocomplete="off">
+                    {% csrf_token %}
+
+                    <h1 class="text-center mb-3">Inicia sesión</h1>
+
+                    {% if errors %}
+                        <div class="alert alert-danger">
+                            <div class="text-center">
+                            {% for error in errors %}
+                                <p class="fw-bold">{{ error }}</p>
+                            {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <div class="mb-3">
+                        <label for="username">Usuario:</label>
+                        <input type="text" name="username" id="username" autocomplete="new-password" autofocus required class="form-control" placeholder="Escribe tu usuario...">
+
+                        {% if form.username.errors %}
+                            <div class="alert alert-danger mt-2 p-0 fw-bold">
+                                {{form.username.errors}}
+                            </div>
+                        {% endif %}
+                    </div>
+            
+                    <div class="mb-3">
+                        <label for="password">Clave:</label>
+                        <input type="password" name="password" id="password" autocomplete="new-password" required class="form-control" placeholder="Escribe tu clave...">
+
+                        {% if form.password.errors %}
+                            <div class="alert alert-danger mt-2 p-0 fw-bold">
+                                {{form.password.errors}}
+                            </div>
+                        {% endif %}
+                    </div>
+            
+                    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                </form>
+
+            </section>
+        </div>
+    </main>
+{% endblock%}

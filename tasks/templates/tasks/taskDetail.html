@@ -1,0 +1,36 @@
+{% extends './layout.html' %}
+
+{% block content %}
+    <main class="container mt-5">
+        <div class="row">
+            <section class="col-md-6 offset-md-3">
+                <div class="card card-body">
+                    <h1 class="text-primary text-center">Detalle de tarea</h1>
+                    <hr>
+                    <h4 class="fw-bold mt-2">{{task.title}}</h4>
+                    <p class="mb-4">{{task.description}}</p>
+                    
+                    <form action="{% url 'tasks:task_detail' task.id %}" method="post" class="card card-body">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                    </form>
+    
+                    <div class="d-block mt-2">
+                        <h6 class="mt-3 mb-3">Otras acciones...</h6>
+                        <hr>
+                        <form action="{% url 'tasks:complete' task.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success w-100">Completar</button>
+                        </form>
+                    
+                        <form action="{% url 'tasks:delete' task.id %}" method="post" class="mt-2">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger w-100">Eliminar tarea</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+{% endblock%}

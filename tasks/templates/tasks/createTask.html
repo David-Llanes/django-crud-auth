@@ -1,0 +1,52 @@
+{% extends './layout.html' %}
+
+{% block content %}
+    <main class="container mt-5">
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+
+                <form action="{% url 'tasks:tasksCreate' %}" method="post" class="card card-body">
+                    <h1 class="text-center">Agregar tarea</h1>
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="title">Título:</label>
+                        <input type="text" name="title" id="title" autocomplete="off" autofocus required class="form-control" placeholder="Nombre de la tarea...">
+
+                        {% if form.title.errors %}
+                            <div class="alert alert-danger mt-2 p-0 fw-bold">
+                                {{form.title.errors}}
+                            </div>
+                        {% endif %}
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="description">Descripción:</label>
+				        <textarea name="description" cols="40" rows="10" class="form-control" placeholder="¿De qué va esta tarea?" id="id_description"></textarea>
+                        
+                        {% if form.description.errors %}
+                            <div class="alert alert-danger mt-2 p-0 fw-bold">
+                                {{form.description.errors}}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="important">Importante:</label>
+                        <input type="checkbox" name="important" id="important" class="form-check-input" placeholder="¿De qué va la tarea?">
+
+                        {% if form.important.errors %}
+                            <div class="alert alert-danger mt-2 p-0 fw-bold">
+                                {{form.important.errors}}
+                            </div>
+                        {% endif %}
+                    </div>
+            
+                    <button type="submit" class="btn btn-primary">Agregar tarea</button>
+                </form>
+
+            </div>
+        </div>
+    </main>
+{% endblock%}
